@@ -404,6 +404,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Tiles:
   - {fileID: 5839655121672657687, guid: 18c5808a4c8aa4b698c641a4be4bf53f, type: 3}
+  Hero: {fileID: 8449826406305194884, guid: fc00bc766e1cb4ce7896b1473f449d4c, type: 3}
 --- !u!4 &1459408777
 Transform:
   m_ObjectHideFlags: 0

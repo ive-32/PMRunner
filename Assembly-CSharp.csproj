@@ -47,11 +47,13 @@
   <ItemGroup>
      <Compile Include="Assets/Scripts/GameScene/Level/BaseTile.cs" />
      <Compile Include="Assets/Scripts/GameScene/Extensions/GameObjectArrayExtension.cs" />
+     <Compile Include="Assets/Scripts/GameScene/Hero/Hero.cs" />
      <Compile Include="Assets/Scripts/GameScene/Level/Level.cs" />
      <Folder Include="Assets" />
      <Folder Include="Assets/Scripts/GameScene/Level" />
      <Folder Include="Assets/Scripts/GameScene/Extensions" />
      <Folder Include="Assets/Settings" />
+     <Folder Include="Assets/Scripts/GameScene/Hero" />
      <Folder Include="Assets/Scripts" />
      <Folder Include="Assets/Settings/Scenes" />
      <Folder Include="Assets/Prefabs" />

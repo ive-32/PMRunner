@@ -16,6 +16,7 @@ namespace GameScene.Level
         
         public float GameSpeed { get; set; } = DefaultGameSpeed;
         [FormerlySerializedAs("tiles")] public GameObject[] Tiles;
+        [FormerlySerializedAs("hero")] public GameObject Hero;
 
 
         // Start is called before the first frame update
@@ -24,6 +25,8 @@ namespace GameScene.Level
             for (var i = 0; i < LevelSize.x; i++)
             for (var j = 0; j < LevelSize.y + 3; j++)
                 Instantiate(Tiles.GetObjectByName("BaseTile"), new Vector3(i, j, 0), Quaternion.identity, transform);
+
+            Instantiate(Hero, new Vector3(1, 2, 0), Quaternion.identity);
         }
 
         // Update is called once per frame
