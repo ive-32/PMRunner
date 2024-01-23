@@ -178,6 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8664347630740076281}
   - component: {fileID: 612382040969278475}
+  - component: {fileID: 1164694483251526472}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Untagged
@@ -218,3 +219,15 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &1164694483251526472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8449826406305194884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae70b2c1df3e4c72aa64560c8d4f81d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -46,9 +46,11 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets/Scripts/GameScene/Level/BaseTile.cs" />
+     <Compile Include="Assets/Scripts/GameScene/Game.cs" />
      <Compile Include="Assets/Scripts/GameScene/Extensions/GameObjectArrayExtension.cs" />
      <Compile Include="Assets/Scripts/GameScene/Hero/Hero.cs" />
      <Compile Include="Assets/Scripts/GameScene/Level/Level.cs" />
+     <Compile Include="Assets/Scripts/GameScene/MainCamera.cs" />
      <Folder Include="Assets" />
      <Folder Include="Assets/Scripts/GameScene/Level" />
      <Folder Include="Assets/Scripts/GameScene/Extensions" />
@@ -58,6 +60,7 @@
      <Folder Include="Assets/Settings/Scenes" />
      <Folder Include="Assets/Prefabs" />
      <Folder Include="Assets/Scenes" />
+     <Folder Include="Assets/Animations" />
      <Folder Include="Assets/Scripts/GameScene" />
      <Folder Include="Assets/Source Media" />
      <Reference Include="UnityEngine">

@@ -15,10 +15,10 @@ namespace GameScene.Level
 
         private void Update()
         {
-            transform.position += new Vector3(0, -Level.GameSpeed * Time.deltaTime, 0);
+            transform.position += new Vector3(0, -Game.GameSpeed * Time.deltaTime, 0);
             if (transform.position.y <= -1)
                 transform.SetPositionAndRotation(
-                    new Vector3(transform.position.x, transform.position.y + Level.LevelSize.y + 2, 0), 
+                    new Vector3(transform.position.x, transform.position.y + Game.LevelSize.y + 2, 0), 
                     Quaternion.identity);
         }
     }
