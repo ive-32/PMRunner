@@ -48,23 +48,32 @@
      <Compile Include="Assets/Scripts/GameScene/Level/BaseLevelObject.cs" />
      <Compile Include="Assets/Scripts/GameScene/Level/BaseTile.cs" />
      <Compile Include="Assets/Scripts/GameScene/Game.cs" />
-     <Compile Include="Assets/Scripts/GameScene/Level/Blocker.cs" />
+     <Compile Include="Assets/Scripts/GameScene/Level/Bonuses/BonusesDescription.cs" />
      <Compile Include="Assets/Scripts/GameScene/Extensions/GameObjectArrayExtension.cs" />
      <Compile Include="Assets/Scripts/GameScene/Hero/Hero.cs" />
+     <Compile Include="Assets/Scripts/GameScene/Level/Bonuses/Bonuses.cs" />
      <Compile Include="Assets/Scripts/GameScene/Level/Level.cs" />
+     <Compile Include="Assets/Scripts/GameScene/Level/Blockers/Blocker.cs" />
+     <Compile Include="Assets/Scripts/GameScene/Level/Blockers/Blockers.cs" />
      <Compile Include="Assets/Scripts/GameScene/MainCamera.cs" />
+     <Compile Include="Assets/Scripts/GameScene/Level/IIntersectable.cs" />
+     <Compile Include="Assets/Scripts/GameScene/Level/BaseItemGenerator.cs" />
      <Folder Include="Assets" />
      <Folder Include="Assets/Scripts/GameScene/Level" />
      <Folder Include="Assets/Scripts/GameScene/Extensions" />
      <Folder Include="Assets/Settings" />
      <Folder Include="Assets/Scripts/GameScene/Hero" />
+     <Folder Include="Assets/Scripts/GameScene/Level/Bonuses" />
      <Folder Include="Assets/Scripts" />
+     <Folder Include="Assets/Scripts/GameScene/Level/Blockers" />
      <Folder Include="Assets/Settings/Scenes" />
      <Folder Include="Assets/Prefabs" />
      <Folder Include="Assets/Scenes" />
      <Folder Include="Assets/Animations" />
+     <Folder Include="Assets/Resources/Blockers" />
      <Folder Include="Assets/Scripts/GameScene" />
      <Folder Include="Assets/Source Media" />
+     <Folder Include="Assets/Resources" />
      <Reference Include="UnityEngine">
      <HintPath>/Applications/Unity/Hub/Editor/2022.3.10f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
      </Reference>

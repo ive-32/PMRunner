@@ -1,4 +1,5 @@
 using System.Linq;
+using GameScene.Level;
 using UnityEngine;
 
 namespace GameScene.Hero
@@ -7,19 +8,19 @@ namespace GameScene.Hero
     {
         private int _targetPositionX = 1;
         private const float PlayerSpeed = 4;
-        private float timeToRestore = 0;
+        private float _timeToRestore = 0;
 
-        private Level.Level _level;
+        private IIntersectable _blockers;
 
         private void Start()
         {
             var levelObj = transform.parent.gameObject;
-            _level = levelObj.GetComponent<Level.Level>();
+            _blockers = levelObj.GetComponentInChildren<Blockers>().GetComponent<BaseItemGenerator>();
         }
 
         private void Update()
         {
-            if (timeToRestore <= 0)
+            if (_timeToRestore <= 0)
             {
                 DoSideSteps();
 
@@ -47,22 +48,22 @@ namespace GameScene.Hero
 
         private void CheckCrash()
         {
-            var blockers = _level.GetNearestObjects(transform.position, 0.3f);
+            var blockers = _blockers.GetNearestObjects(transform.position, 0.3f);
             
             if (blockers.Any())
             {
                 blockers.ForEach(b => Destroy(b.gameObject));
                 Game.PlayerMovingSpeed = 0;
-                timeToRestore = 1;
+                _timeToRestore = 1;
             }
         }
 
         private void DoPauseAfterFalling()
         {
-            timeToRestore -= Time.deltaTime;
-            if (timeToRestore <= 0)
+            _timeToRestore -= Time.deltaTime;
+            if (_timeToRestore <= 0)
             {
-                timeToRestore = 0;
+                _timeToRestore = 0;
                 Game.PlayerMovingSpeed = Game.DefaultGameSpeed;
             }
         }
