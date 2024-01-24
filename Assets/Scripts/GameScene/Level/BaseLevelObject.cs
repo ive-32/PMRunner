@@ -8,7 +8,7 @@ namespace GameScene.Level
         {
             transform.position += new Vector3(0, -Game.PlayerMovingSpeed * Time.deltaTime, 0);
             if (transform.position.y <= -1)
-                Destroy(this.gameObject);
+                Destroy(gameObject);
         }
     }
 }
