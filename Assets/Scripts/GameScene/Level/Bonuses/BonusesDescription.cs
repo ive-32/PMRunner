@@ -1,4 +1,4 @@
-using UnityEngine.Serialization;
+using UnityEngine;
 
 namespace GameScene.Level.Bonuses
 {
@@ -7,5 +7,15 @@ namespace GameScene.Level.Bonuses
     {
         public string[] itemNames;
         public string memeName;
+
+        [System.NonSerialized] public GameObject[] Items;
+        [System.NonSerialized] public GameObject Meme;
     }
+    
+    [System.Serializable]
+    public class BonusesDescriptions
+    {
+        public BonusesDescription[] memes;
+    }
+
 }

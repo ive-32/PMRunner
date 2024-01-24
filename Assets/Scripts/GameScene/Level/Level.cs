@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using GameScene.Extensions;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -12,6 +11,7 @@ namespace GameScene.Level
         [FormerlySerializedAs("hero")] public GameObject Hero;
 
         private GameObject _blockers;
+        private GameObject _bonusItems;
         private GameObject _floorTiles;
         
         // Start is called before the first frame update
@@ -19,6 +19,9 @@ namespace GameScene.Level
         {
             _blockers = CreateEmptyChildContainer("Blockers");
             _blockers.gameObject.AddComponent<Blockers>();
+
+            _blockers = CreateEmptyChildContainer("BonusItems");
+            _blockers.gameObject.AddComponent<Bonuses.Bonuses>();
             
             for (var i = 0; i < Game.LevelSize.x; i++)
             for (var j = 0; j < Game.LevelSize.y + 3; j++)

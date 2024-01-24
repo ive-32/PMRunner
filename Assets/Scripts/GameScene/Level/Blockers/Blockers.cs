@@ -13,8 +13,8 @@ namespace GameScene.Level
 
         protected override void GenerateItem()
         {
-            var rackCoord = Random.Range(0, 3);
-            Instantiate(_blockerItem, new Vector3(rackCoord, 12, 0), Quaternion.identity, transform);
+            var objCoord = Random.Range(0, 3);
+            Instantiate(_blockerItem, new Vector3(objCoord, 12, 0), Quaternion.identity, transform);
         }
     }
 }
