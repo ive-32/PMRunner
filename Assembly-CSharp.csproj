@@ -68,6 +68,7 @@
      <Folder Include="Assets/Scripts/GameScene/Extensions" />
      <Folder Include="Assets/Source Media/Blockers" />
      <Folder Include="Assets/Settings" />
+     <Folder Include="Assets/Source Media/HeroModel3D/textures" />
      <Folder Include="Assets/Resources/Memes" />
      <Folder Include="Assets/Scripts/GameScene/Hero" />
      <Folder Include="Assets/Scripts/GameScene/Level/Memes" />
@@ -76,12 +77,14 @@
      <Folder Include="Assets/Settings/Scenes" />
      <Folder Include="Assets/Prefabs" />
      <Folder Include="Assets/Resources/Memes/Textures" />
+     <Folder Include="Assets/Source Media/HeroModel3D" />
      <Folder Include="Assets/Source Media/Memes" />
      <Folder Include="Assets/Scenes" />
      <Folder Include="Assets/Animations" />
      <Folder Include="Assets/Resources/Blockers" />
      <None Include="Assets/Resources/MemesDescription.json" />
      <Folder Include="Assets/Scripts/GameScene" />
+     <Folder Include="Assets/Source Media/HeroModel3D/source" />
      <Folder Include="Assets/Source Media" />
      <Folder Include="Assets/Resources" />
      <Reference Include="UnityEngine">

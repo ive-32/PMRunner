@@ -9,7 +9,7 @@ namespace GameScene.Hero
     public class Hero : MonoBehaviour
     {
         private int _targetPositionX = 1;
-        private const float PlayerSpeed = 4;
+        private const float PlayerSpeed = 1.5f;
         private float _timeToRestore = 0;
 
         private IIntersectable _blockers;
@@ -17,6 +17,9 @@ namespace GameScene.Hero
 
         private MemeCollector _memeCollector;
         private GameObject _memeCollectorObject;
+        private Animator _animator;
+        private GameObject _mainModel;
+        private GameObject _skeleton;
 
         private void Start()
         {
@@ -25,6 +28,10 @@ namespace GameScene.Hero
             _memeItems = levelObj.GetComponentInChildren<MemeItemsGenerator>().GetComponent<BaseItemGenerator>();
             _memeCollectorObject = new GameObject();
             _memeCollector = _memeCollectorObject.AddComponent<MemeCollector>();
+            _animator = gameObject.GetComponentInChildren<Animator>();
+            _mainModel = transform.Find("MainModel").gameObject;
+            _skeleton = _mainModel.transform.Find("Unity compliant skeleton").gameObject;
+
         }
 
         private void Update()
@@ -68,7 +75,8 @@ namespace GameScene.Hero
             {
                 blockers.ForEach(b => Destroy(b.gameObject));
                 Game.PlayerMovingSpeed = 0;
-                _timeToRestore = 1;
+                _timeToRestore = 2.5f;
+                _animator.SetTrigger("Fall");
             }
         }
 
