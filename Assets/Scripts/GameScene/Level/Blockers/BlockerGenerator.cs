@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace GameScene.Level
+namespace GameScene.Level.Blockers
 {
-    public class Blockers : BaseItemGenerator
+    public class BlockerGenerator : BaseItemGenerator
     {
         private GameObject _blockerItem;
 

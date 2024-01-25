@@ -1,6 +1,4 @@
-using Random = UnityEngine.Random;
-
-namespace GameScene.Level
+namespace GameScene.Level.Blockers
 {
     public class Blocker : BaseLevelObject
     {

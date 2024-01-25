@@ -1,5 +1,6 @@
 using System.Linq;
 using GameScene.Level;
+using GameScene.Level.Blockers;
 using UnityEngine;
 
 namespace GameScene.Hero
@@ -15,7 +16,7 @@ namespace GameScene.Hero
         private void Start()
         {
             var levelObj = transform.parent.gameObject;
-            _blockers = levelObj.GetComponentInChildren<Blockers>().GetComponent<BaseItemGenerator>();
+            _blockers = levelObj.GetComponentInChildren<BlockerGenerator>().GetComponent<BaseItemGenerator>();
         }
 
         private void Update()

@@ -1,19 +1,19 @@
 {
   "memes" : [
     {
-      "itemNames" : [
+      "itemNames": [
         "Woman",
         "Woman",
         "Cat"
       ],
-      "memeName" : "WomenAndCat"
+      "memeName": "WomenAndCat"
     },
     {
-      "itemNames" : [
+      "itemNames": [
         "Cat",
         "Smile"
       ],
-      "memeName" : "SmilingCat"
+      "memeName": "SmilingCat"
     }
   ]
 }
