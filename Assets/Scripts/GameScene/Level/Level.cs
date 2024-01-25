@@ -19,7 +19,7 @@ namespace GameScene.Level
         // Start is called before the first frame update
         private void Start()
         {
-            MemeItemTextures.LoadResources();
+            MemeItemSprites.LoadResources();
             MemeDescriptions.LoadMemeDescriptions();
             
             _blockers = CreateEmptyChildContainer("Blockers");

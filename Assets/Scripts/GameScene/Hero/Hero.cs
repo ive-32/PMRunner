@@ -1,6 +1,7 @@
 using System.Linq;
 using GameScene.Level;
 using GameScene.Level.Blockers;
+using GameScene.Level.Memes;
 using UnityEngine;
 
 namespace GameScene.Hero
@@ -12,11 +13,18 @@ namespace GameScene.Hero
         private float _timeToRestore = 0;
 
         private IIntersectable _blockers;
+        private IIntersectable _memeItems;
+
+        private MemeCollector _memeCollector;
+        private GameObject _memeCollectorObject;
 
         private void Start()
         {
             var levelObj = transform.parent.gameObject;
             _blockers = levelObj.GetComponentInChildren<BlockerGenerator>().GetComponent<BaseItemGenerator>();
+            _memeItems = levelObj.GetComponentInChildren<MemeItemsGenerator>().GetComponent<BaseItemGenerator>();
+            _memeCollectorObject = new GameObject();
+            _memeCollector = _memeCollectorObject.AddComponent<MemeCollector>();
         }
 
         private void Update()
@@ -26,6 +34,11 @@ namespace GameScene.Hero
                 DoSideSteps();
 
                 CheckCrash();
+
+                CheckCollectMemeItem();
+                
+                if (Input.GetKeyUp(KeyCode.Space))
+                    _memeCollector.UseMeme();
             }
             else
             {
@@ -59,6 +72,17 @@ namespace GameScene.Hero
             }
         }
 
+        private void CheckCollectMemeItem()
+        {
+            var memeItems = _memeItems.GetNearestObjects(transform.position, 0.5f);
+
+            foreach (var memeItem in memeItems)
+            {
+                _memeCollector.CollectMemeItem(memeItem.GetComponent<MemeItem>().MemeName);
+                Destroy(memeItem.gameObject);
+            }
+        }
+        
         private void DoPauseAfterFalling()
         {
             _timeToRestore -= Time.deltaTime;
