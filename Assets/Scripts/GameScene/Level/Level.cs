@@ -1,4 +1,6 @@
 using GameScene.Extensions;
+using GameScene.Level.Blockers;
+using GameScene.Level.Memes;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -11,21 +13,26 @@ namespace GameScene.Level
         [FormerlySerializedAs("hero")] public GameObject Hero;
 
         private GameObject _blockers;
-        private GameObject _bonusItems;
+        private GameObject _memeItems;
         private GameObject _floorTiles;
         
         // Start is called before the first frame update
         private void Start()
         {
-            _blockers = CreateEmptyChildContainer("Blockers");
-            _blockers.gameObject.AddComponent<Blockers>();
-
-            _blockers = CreateEmptyChildContainer("BonusItems");
-            _blockers.gameObject.AddComponent<Bonuses.Bonuses>();
+            MemeItemTextures.LoadResources();
+            MemeDescriptions.LoadMemeDescriptions();
             
+            _blockers = CreateEmptyChildContainer("Blockers");
+            _blockers.gameObject.AddComponent<BlockerGenerator>();
+
+            _memeItems = CreateEmptyChildContainer("MemeItems");
+            _memeItems.gameObject.AddComponent<MemeItemsGenerator>();
+
+            _floorTiles = CreateEmptyChildContainer("FloorItems");
+
             for (var i = 0; i < Game.LevelSize.x; i++)
             for (var j = 0; j < Game.LevelSize.y + 3; j++)
-                Instantiate(Tiles.GetObjectByName("BaseTile"), new Vector3(i, j, 0), Quaternion.identity, transform);
+                Instantiate(Tiles.GetObjectByName("BaseTile"), new Vector3(i, j, 0), Quaternion.identity, _floorTiles.transform);
 
             Instantiate(Hero, new Vector3(1, 2, 0), Quaternion.identity, transform);
         }
