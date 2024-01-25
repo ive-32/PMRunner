@@ -8,10 +8,10 @@ namespace GameScene.Level
 
         private void Update()
         {
-            transform.position += new Vector3(0, -Game.PlayerMovingSpeed * Time.deltaTime, 0);
-            if (transform.position.y <= -1)
+            transform.position += new Vector3(-Game.PlayerMovingSpeed * Time.deltaTime, 0, 0);
+            if (transform.position.x <= -1)
                 transform.SetPositionAndRotation(
-                    new Vector3(transform.position.x, transform.position.y + Game.LevelSize.y + 2, 0), 
+                    new Vector3(transform.position.x + Game.LevelSize.x + 2, transform.position.y, 0), 
                     Quaternion.identity);
         }
     }
