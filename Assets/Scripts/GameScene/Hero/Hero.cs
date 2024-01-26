@@ -18,8 +18,6 @@ namespace GameScene.Hero
         private MemeCollector _memeCollector;
         private GameObject _memeCollectorObject;
         private Animator _animator;
-        private GameObject _mainModel;
-        private GameObject _skeleton;
 
         private void Start()
         {
@@ -29,8 +27,6 @@ namespace GameScene.Hero
             _memeCollectorObject = new GameObject();
             _memeCollector = _memeCollectorObject.AddComponent<MemeCollector>();
             _animator = gameObject.GetComponentInChildren<Animator>();
-            _mainModel = transform.Find("MainModel").gameObject;
-            _skeleton = _mainModel.transform.Find("Unity compliant skeleton").gameObject;
 
         }
 
@@ -43,9 +39,12 @@ namespace GameScene.Hero
                 CheckCrash();
 
                 CheckCollectMemeItem();
-                
+
                 if (Input.GetKeyUp(KeyCode.Space))
+                {
                     _memeCollector.UseMeme();
+                    Jump();
+                }
             }
             else
             {
@@ -74,8 +73,11 @@ namespace GameScene.Hero
             if (blockers.Any())
             {
                 blockers.ForEach(b => Destroy(b.gameObject));
-                Game.PlayerMovingSpeed = 0;
-                _timeToRestore = 2.5f;
+                //Game.PlayerMovingSpeed = Game.DefaultGameSpeed / 2;
+                var clips = _animator.GetCurrentAnimatorClipInfo(0);
+                var clip = clips.Where(c => c.clip.name == "Fall flat").ToList();
+                
+                _timeToRestore = clip.Any() ? clip[0].clip.length : 1f;
                 _animator.SetTrigger("Fall");
             }
         }
@@ -99,6 +101,11 @@ namespace GameScene.Hero
                 _timeToRestore = 0;
                 Game.PlayerMovingSpeed = Game.DefaultGameSpeed;
             }
+        }
+
+        private void Jump()
+        {
+            _animator.SetTrigger("Jump");
         }
 
         private void DoSideSteps()

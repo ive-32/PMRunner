@@ -45,9 +45,11 @@
     <Analyzer Include="/Applications/Unity/Hub/Editor/2022.3.10f1/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets/AdjustAnimationScript.cs" />
      <Compile Include="Assets/Scripts/GameScene/Level/BaseLevelObject.cs" />
      <Compile Include="Assets/Scripts/GameScene/Level/Memes/MemeCollector.cs" />
      <Compile Include="Assets/Scripts/GameScene/Level/BaseTile.cs" />
+     <Compile Include="Assets/Scripts/GameScene/Common/AnimationCorrect.cs" />
      <Compile Include="Assets/Scripts/GameScene/Game.cs" />
      <Compile Include="Assets/Scripts/GameScene/Level/Memes/MemeItemsGenerator.cs" />
      <Compile Include="Assets/Scripts/GameScene/Extensions/GameObjectArrayExtension.cs" />
@@ -67,20 +69,26 @@
      <Folder Include="Assets/Scripts/GameScene/Level" />
      <Folder Include="Assets/Scripts/GameScene/Extensions" />
      <Folder Include="Assets/Source Media/Blockers" />
+     <Folder Include="/var/folders/21/pyvg2rpd0k546hjsp6qbch_40000gn/T/fwefwm82.bru/SceneTemplates/InMemory/fa619568aa1340dc9a5deead9a28f830" />
      <Folder Include="Assets/Settings" />
      <Folder Include="Assets/Source Media/HeroModel3D/textures" />
      <Folder Include="Assets/Resources/Memes" />
      <Folder Include="Assets/Scripts/GameScene/Hero" />
      <Folder Include="Assets/Scripts/GameScene/Level/Memes" />
      <Folder Include="Assets/Scripts" />
+     <Folder Include="/var/folders/21/pyvg2rpd0k546hjsp6qbch_40000gn/T/fwefwm82.bru/SceneTemplates/InMemory/932b641b54ba46179e5b0a6f4f5ef9f8/Untitled" />
      <Folder Include="Assets/Scripts/GameScene/Level/Blockers" />
      <Folder Include="Assets/Settings/Scenes" />
      <Folder Include="Assets/Prefabs" />
      <Folder Include="Assets/Resources/Memes/Textures" />
      <Folder Include="Assets/Source Media/HeroModel3D" />
      <Folder Include="Assets/Source Media/Memes" />
+     <Folder Include="/var/folders/21/pyvg2rpd0k546hjsp6qbch_40000gn/T/fwefwm82.bru/SceneTemplates/InMemory" />
      <Folder Include="Assets/Scenes" />
+     <Folder Include="Assets/Scripts/GameScene/Common" />
      <Folder Include="Assets/Animations" />
+     <Folder Include="/var/folders/21/pyvg2rpd0k546hjsp6qbch_40000gn/T/fwefwm82.bru/SceneTemplates/InMemory/32f39903a688488db6225473b2218767" />
+     <Folder Include="/var/folders/21/pyvg2rpd0k546hjsp6qbch_40000gn/T/fwefwm82.bru/SceneTemplates/InMemory/932b641b54ba46179e5b0a6f4f5ef9f8" />
      <Folder Include="Assets/Resources/Blockers" />
      <None Include="Assets/Resources/MemesDescription.json" />
      <Folder Include="Assets/Scripts/GameScene" />
