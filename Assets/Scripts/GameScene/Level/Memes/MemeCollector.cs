@@ -19,7 +19,7 @@ namespace GameScene.Level.Memes
                     new Vector3(0, MemeDescriptions.Memes.Count - i, 0), Quaternion.identity);
                 MemeCollectorItems.Add(memeCollectorItem);
             }
-            transform.SetPositionAndRotation(new Vector3(-6, Game.LevelSize.y - 4, 0), Quaternion.identity);
+            transform.SetPositionAndRotation(new Vector3(-6, Game.LevelSize.y - MemeDescriptions.Memes.Count - 1, 0), Quaternion.identity);
         }
 
         public void CollectMemeItem(string memeItemName)

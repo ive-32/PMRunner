@@ -18,7 +18,7 @@ namespace GameScene.Level.Memes
             
             var sprite = MemeItemSprites.GetRandomSprite();
             var spriteRenderer = CurrentObject.GetComponent<SpriteRenderer>();
-            spriteRenderer.color = Random.ColorHSV(0, 1, 1, 1, 1, 1);
+            //spriteRenderer.color = Random.ColorHSV(0, 1, 1, 1, 1, 1);
             spriteRenderer.sprite = sprite;
             CurrentObject.transform.localScale = new Vector3(0.5f, 0.5f, 1);
             MemeName = spriteRenderer.sprite.name;

@@ -16,15 +16,17 @@ namespace GameScene.Level.Memes
                 set
                 {
                     _isCollected = value;
-                    SpriteRenderer.color = _isCollected ? CollectedColor : UncollectedColor;
+                    Color currentColor = SpriteRenderer.color;
+                    currentColor.a = _isCollected ? CollectedAlpha : UncollectedAlpha;
+                    SpriteRenderer.color = currentColor;
                 }
             }
             public string Name;
             public SpriteRenderer SpriteRenderer;
         }
         
-        private static readonly Color UncollectedColor = new Color(0.5f, 0.5f, 0.5f);
-        private static readonly Color CollectedColor = new Color(0.5f, 1f, 0.8f);
+        private static readonly float UncollectedAlpha = 0.3f;
+        private static readonly float CollectedAlpha = 1f;
         
         public List<MemeCollectorItemMemeItem> MemeItems;
         public GameObject Meme;
@@ -45,7 +47,9 @@ namespace GameScene.Level.Memes
                 var memeItem = MemeItems[i].MemeItem.gameObject; 
                 memeItem.transform.SetParent(MemeCollectorItemObject.transform);
                 memeItem.transform.SetLocalPositionAndRotation(new Vector3(i, 0, 0), Quaternion.identity);
-                memeItem.GetComponent<SpriteRenderer>().color = UncollectedColor;
+                Color currentColor = memeItem.GetComponent<SpriteRenderer>().color;
+                currentColor.a = UncollectedAlpha;
+                memeItem.GetComponent<SpriteRenderer>().color = currentColor;
             }
         }
 
