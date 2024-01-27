@@ -2,25 +2,91 @@
   "memes" : [
     {
       "itemNames": [
-        "Woman",
-        "Woman",
-        "Cat"
+        "woman",
+        "man",
+        "woman"
       ],
-      "memeName": "WomenAndCat"
+      "memeName": "m1"
     },
     {
       "itemNames": [
-        "Cat",
-        "Smile"
+        "man",
+        "tree",
+        "car"
       ],
-      "memeName": "SmilingCat"
+      "memeName": "m2"
     },
     {
       "itemNames": [
-        "Smile",
-        "Woman"
+        "man",
+        "tree"
       ],
-      "memeName": "SmilingCat"
+      "memeName": "m3"
+    },
+    {
+      "itemNames": [
+        "evil",
+        "hand"
+      ],
+      "memeName": "m4"
+    },
+    {
+      "itemNames": [
+        "hand",
+        "face"
+      ],
+      "memeName": "m5"
+    },
+    {
+      "itemNames": [
+        "hand",
+        "man"
+      ],
+      "memeName": "m6"
+    },
+    {
+      "itemNames": [
+        "woman",
+        "hand"
+      ],
+      "memeName": "m8"
+    },
+    {
+      "itemNames": [
+        "man",
+        "evil",
+        "brain"
+      ],
+      "memeName": "m11"
+    },
+    {
+      "itemNames": [
+        "woman",
+        "woman",
+        "cat"
+      ],
+      "memeName": "m12"
+    },
+    {
+      "itemNames": [
+        "woman",
+        "brain"
+      ],
+      "memeName": "m13"
+    },
+    {
+      "itemNames": [
+        "cat",
+        "face"
+      ],
+      "memeName": "m14"
+    },
+    {
+      "itemNames": [
+        "car",
+        "brain"
+      ],
+      "memeName": "m16"
     }
   ]
 }
