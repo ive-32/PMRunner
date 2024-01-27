@@ -8,8 +8,8 @@ namespace GameScene.Hero
 {
     public class Hero : MonoBehaviour
     {
-        private int _targetPositionX = 1;
-        private const float PlayerSpeed = 4;
+        private int _targetPositionX = Game.LevelSize.x / 2;
+        private const float PlayerSlideSpeed = 4;
         private float _timeToRestore = 0;
 
         private IIntersectable _blockers;
@@ -17,6 +17,7 @@ namespace GameScene.Hero
 
         private MemeCollector _memeCollector;
         private GameObject _memeCollectorObject;
+        private float _localDistance = 0;
 
         private void Start()
         {
@@ -25,6 +26,7 @@ namespace GameScene.Hero
             _memeItems = levelObj.GetComponentInChildren<MemeItemsGenerator>().GetComponent<BaseItemGenerator>();
             _memeCollectorObject = new GameObject();
             _memeCollector = _memeCollectorObject.AddComponent<MemeCollector>();
+            _localDistance = 0;
         }
 
         private void Update()
@@ -39,6 +41,12 @@ namespace GameScene.Hero
                 
                 if (Input.GetKeyUp(KeyCode.Space))
                     _memeCollector.UseMeme();
+
+                _localDistance += Game.PlayerMovingSpeed * Time.deltaTime;
+                if (Mathf.RoundToInt(_localDistance) != Game.Distance.GetCurrentValue())
+                {
+                    Game.Distance.Value = Mathf.RoundToInt(_localDistance);
+                }
             }
             else
             {
@@ -69,6 +77,7 @@ namespace GameScene.Hero
                 blockers.ForEach(b => Destroy(b.gameObject));
                 Game.PlayerMovingSpeed = 0;
                 _timeToRestore = 1;
+                Game.Lives.Value -= 1;
             }
         }
 
@@ -109,7 +118,7 @@ namespace GameScene.Hero
             {
                 var targetPosition = new Vector3(_targetPositionX, currentPosition.y, currentPosition.z);
                 var direction = targetPosition - currentPosition;
-                var delta = direction.normalized * (Time.deltaTime * PlayerSpeed);
+                var delta = direction.normalized * (Time.deltaTime * PlayerSlideSpeed);
                 if (delta.magnitude < direction.magnitude)
                     transform.position += delta;
                 else

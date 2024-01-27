@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using GameScene.Level.Common;
 using UnityEngine;
 
 namespace GameScene.Level.Memes
@@ -19,7 +20,7 @@ namespace GameScene.Level.Memes
                     new Vector3(0, MemeDescriptions.Memes.Count - i, 0), Quaternion.identity);
                 MemeCollectorItems.Add(memeCollectorItem);
             }
-            transform.SetPositionAndRotation(new Vector3(-6, Game.LevelSize.y - 4, 0), Quaternion.identity);
+            transform.SetPositionAndRotation(new Vector3(-6, Game.LevelSize.y - 7, 0), Quaternion.identity);
         }
 
         public void CollectMemeItem(string memeItemName)
@@ -37,7 +38,13 @@ namespace GameScene.Level.Memes
         {
             var meme = MemeCollectorItems.FirstOrDefault(m => m.IsCollected);
 
-            meme?.MemeItems.ForEach(mi => mi.IsCollected = false);
+            if (meme != null)
+            {
+                meme.MemeItems.ForEach(mi => mi.IsCollected = false);
+
+                var memeObj = Instantiate(meme.MemePrefab, new Vector3(-5, Game.LevelSize.y / 2, 0), Quaternion.identity);
+                memeObj.GetComponent<Meme>().MemeName = meme.MemeName;
+            }
         }
     }
 }

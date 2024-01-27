@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using GameScene.Level.Common;
 using UnityEngine;
 
 namespace GameScene.Level.Memes
@@ -27,7 +28,8 @@ namespace GameScene.Level.Memes
         private static readonly Color CollectedColor = new Color(0.5f, 1f, 0.8f);
         
         public List<MemeCollectorItemMemeItem> MemeItems;
-        public GameObject Meme;
+        public GameObject MemePrefab;
+        public string MemeName;
         
         public bool IsCollected => MemeItems.All(m => m.IsCollected);
 
@@ -47,6 +49,9 @@ namespace GameScene.Level.Memes
                 memeItem.transform.SetLocalPositionAndRotation(new Vector3(i, 0, 0), Quaternion.identity);
                 memeItem.GetComponent<SpriteRenderer>().color = UncollectedColor;
             }
+
+            MemePrefab = Resources.Load<GameObject>("Memes/Meme");
+            MemeName = description.memeName;
         }
 
         private MemeCollectorItemMemeItem CreateMemeItemObject(string name)

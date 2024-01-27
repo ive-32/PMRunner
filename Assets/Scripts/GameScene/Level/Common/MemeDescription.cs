@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace GameScene.Level.Memes
+namespace GameScene.Level.Common
 {
     [System.Serializable]
     public class MemeDescription
