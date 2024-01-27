@@ -386,8 +386,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Tiles:
   - {fileID: 5839655121672657687, guid: 18c5808a4c8aa4b698c641a4be4bf53f, type: 3}
-  Hero: {fileID: 8449826406305194884, guid: fc00bc766e1cb4ce7896b1473f449d4c, type: 3}
-  Blocker: {fileID: 427901818551416079, guid: b5cda333a3c474496aec64bc1833c81c, type: 3}
+  HeroPrefab: {fileID: 8449826406305194884, guid: fc00bc766e1cb4ce7896b1473f449d4c, type: 3}
+  UiLabelPrefab: {fileID: 5216148035468544207, guid: 6cc2f1a0d49774acbade62fcec1e475f, type: 3}
+  UiSplashLabelPrefab: {fileID: 5216148035468544207, guid: b892cdbadcfa44694a8238e5567deb77, type: 3}
 --- !u!4 &1459408777
 Transform:
   m_ObjectHideFlags: 0
