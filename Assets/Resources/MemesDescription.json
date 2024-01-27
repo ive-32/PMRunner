@@ -25,13 +25,6 @@
     },
     {
       "itemNames": [
-        "evil",
-        "hand"
-      ],
-      "memeName": "m4"
-    },
-    {
-      "itemNames": [
         "hand",
         "face"
       ],
@@ -43,13 +36,6 @@
         "man"
       ],
       "memeName": "m6"
-    },
-    {
-      "itemNames": [
-        "woman",
-        "hand"
-      ],
-      "memeName": "m8"
     },
     {
       "itemNames": [
