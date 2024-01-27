@@ -13,8 +13,8 @@ namespace GameScene.Level.Blockers
 
         protected override void GenerateItem()
         {
-            var objCoord = Random.Range(0, 3);
-            Instantiate(_blockerItem, new Vector3(objCoord, 12, 0), Quaternion.identity, transform);
+            var objCoord = Random.Range(0, Game.LevelSize.x);
+            Instantiate(_blockerItem, new Vector3(objCoord, Game.LevelSize.y, 0), Quaternion.identity, transform);
         }
     }
 }

@@ -35,7 +35,7 @@ namespace GameScene.Level
             for (var j = 0; j < Game.LevelSize.y + 3; j++)
                 Instantiate(Tiles.GetObjectByName("BaseTile"), new Vector3(i, j, 0), Quaternion.identity, _floorTiles.transform);
 
-            Instantiate(Hero, new Vector3(1, 2, 0), Quaternion.identity, transform);
+            Instantiate(Hero, new Vector3(Game.LevelSize.x / 2, 2, 0), Quaternion.identity, transform);
         }
 
         private GameObject CreateEmptyChildContainer(string containerName)

@@ -8,7 +8,7 @@ namespace GameScene.Hero
 {
     public class Hero : MonoBehaviour
     {
-        private int _targetPositionX = 1;
+        private int _targetPositionX = Game.LevelSize.x / 2;
         private const float PlayerSpeed = 4;
         private float _timeToRestore = 0;
 
