@@ -1,14 +1,14 @@
 using System.Linq;
 using UnityEngine;
 
-namespace GameScene.Level.Memes
+namespace GameScene.Level.Common
 {
-    public static class MemeItemSprites
+    public static class MemesSprites 
     {
         private static Sprite[] _sprites;
         private static bool _loaded;
 
-        static MemeItemSprites()
+        static MemesSprites()
         {
             LoadResources();
         }
@@ -37,8 +37,9 @@ namespace GameScene.Level.Memes
         
         public static void LoadResources()
         {
-            _sprites = Resources.LoadAll<Sprite>("Memes/Textures");
+            _sprites = Resources.LoadAll<Sprite>("Memes/CompleteMemeTextures");
             _loaded = true;
         }
+        
     }
 }

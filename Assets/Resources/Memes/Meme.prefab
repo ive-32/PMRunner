@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5869121427301680313}
   - component: {fileID: 2749673815665025339}
-  - component: {fileID: 2136633422954856774}
   m_Layer: 0
   m_Name: ItemSprite
   m_TagString: Untagged
@@ -73,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 83a08bb1835554363994e9fdc4543e4f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -85,21 +84,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!111 &2136633422954856774
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4022020947165005922}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!1 &4215631575812934853
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,9 +93,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3368711943175218466}
-  - component: {fileID: 6853547634385507067}
+  - component: {fileID: -3210647276271063833}
+  - component: {fileID: -8382534004842596975}
   m_Layer: 0
-  m_Name: Memes
+  m_Name: Meme
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -133,24 +118,31 @@ Transform:
   - {fileID: 5869121427301680313}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &6853547634385507067
-Animator:
-  serializedVersion: 5
+--- !u!114 &-3210647276271063833
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4215631575812934853}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9fa29a65d32464dd58eb723b7d630a91, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 925bb8cd0aa245b390cd10362a2e9856, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!111 &-8382534004842596975
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4215631575812934853}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 9ea5edbfa2d8b4d4b836f939a9c81691, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 9ea5edbfa2d8b4d4b836f939a9c81691, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0

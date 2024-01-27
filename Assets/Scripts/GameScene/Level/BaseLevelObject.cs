@@ -8,14 +8,12 @@ namespace GameScene.Level
         protected virtual void Awake()
         {
             var childCount = transform.childCount;
-            for (var i = 0; i < transform.childCount; i++)
+            for (var i = 0; i < childCount; i++)
             {
-                transform.GetChild(i).gameObject.SetActive(false);
+                var obj = transform.GetChild(i).gameObject;
+                if (obj.name == "ItemSprite")
+                    CurrentObject = obj;
             }
-
-            var currentBlock = Random.Range(0, childCount);
-            CurrentObject = transform.GetChild(currentBlock).gameObject; 
-            CurrentObject.SetActive(true);
         }
 
         protected virtual void Update()

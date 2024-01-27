@@ -46,21 +46,23 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets/Scripts/GameScene/Level/BaseLevelObject.cs" />
+     <Compile Include="Assets/Scripts/GameScene/Level/Memes/Meme.cs" />
      <Compile Include="Assets/Scripts/GameScene/Level/Memes/MemeCollector.cs" />
      <Compile Include="Assets/Scripts/GameScene/Level/BaseTile.cs" />
+     <Compile Include="Assets/Scripts/GameScene/Level/Common/MemesSprites.cs" />
      <Compile Include="Assets/Scripts/GameScene/Game.cs" />
+     <Compile Include="Assets/Scripts/GameScene/Level/Common/MemeItemSprites.cs" />
+     <Compile Include="Assets/Scripts/GameScene/Level/Common/MemeDescription.cs" />
      <Compile Include="Assets/Scripts/GameScene/Level/Memes/MemeItemsGenerator.cs" />
      <Compile Include="Assets/Scripts/GameScene/Extensions/GameObjectArrayExtension.cs" />
      <Compile Include="Assets/Scripts/GameScene/Hero/Hero.cs" />
      <Compile Include="Assets/Scripts/GameScene/Level/Blockers/BlockerGenerator.cs" />
      <Compile Include="Assets/Scripts/GameScene/Level/Level.cs" />
-     <Compile Include="Assets/Scripts/GameScene/Level/Memes/MemeDescription.cs" />
      <Compile Include="Assets/Scripts/GameScene/Level/Blockers/Blocker.cs" />
      <Compile Include="Assets/Scripts/GameScene/MainCamera.cs" />
      <Compile Include="Assets/Scripts/GameScene/Level/Memes/MemeCollectorItem.cs" />
      <Compile Include="Assets/Scripts/GameScene/Level/IIntersectable.cs" />
      <Compile Include="Assets/Scripts/GameScene/Level/BaseItemGenerator.cs" />
-     <Compile Include="Assets/Scripts/GameScene/Level/Memes/MemeItemSprites.cs" />
      <Compile Include="Assets/Scripts/GameScene/Level/Memes/MemeItem.cs" />
      <Folder Include="Assets" />
      <Folder Include="Assets/Source Media/MemeItems" />
@@ -81,7 +83,9 @@
      <Folder Include="Assets/Animations" />
      <Folder Include="Assets/Resources/Blockers" />
      <None Include="Assets/Resources/MemesDescription.json" />
+     <Folder Include="Assets/Resources/Memes/CompleteMemeTextures" />
      <Folder Include="Assets/Scripts/GameScene" />
+     <Folder Include="Assets/Scripts/GameScene/Level/Common" />
      <Folder Include="Assets/Source Media" />
      <Folder Include="Assets/Resources" />
      <Reference Include="UnityEngine">
