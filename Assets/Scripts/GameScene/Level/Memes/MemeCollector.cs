@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using GameScene.Level.Common;
 using UnityEngine;
 
 namespace GameScene.Level.Memes
@@ -7,19 +8,26 @@ namespace GameScene.Level.Memes
     public class MemeCollector : MonoBehaviour
     {
         public List<MemeCollectorItem> MemeCollectorItems = new List<MemeCollectorItem>();
+        public GameObject targetContainer;
 
         public void Start()
         {
+            transform.SetParent(targetContainer.transform);
+            transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+            transform.name = "MemeCollector";
             for (var i = 0; i < MemeDescriptions.Memes.Count; i++)
             {
                 var memeDescription = MemeDescriptions.Memes[i];
-                var memeCollectorItem = new MemeCollectorItem(memeDescription);
-                memeCollectorItem.MemeCollectorItemObject.transform.SetParent(transform);
-                memeCollectorItem.MemeCollectorItemObject.transform.SetLocalPositionAndRotation(
-                    new Vector3(0, MemeDescriptions.Memes.Count - i, 0), Quaternion.identity);
+                var memeCollectorItemObject = new GameObject();
+                memeCollectorItemObject.transform.name = $"MemeCollectorItem{i}";
+                memeCollectorItemObject.transform.SetParent(transform);
+                memeCollectorItemObject.transform.SetLocalPositionAndRotation(
+                    new Vector3(0.25f, -0.25f - i * 0.25f, 0), Quaternion.identity);
+                var memeCollectorItem = memeCollectorItemObject.AddComponent<MemeCollectorItem>();
+                memeCollectorItem.description = memeDescription;
+
                 MemeCollectorItems.Add(memeCollectorItem);
             }
-            transform.SetPositionAndRotation(new Vector3(-6, Game.LevelSize.y - 4, 0), Quaternion.identity);
         }
 
         public void CollectMemeItem(string memeItemName)
@@ -37,7 +45,17 @@ namespace GameScene.Level.Memes
         {
             var meme = MemeCollectorItems.FirstOrDefault(m => m.IsCollected);
 
-            meme?.MemeItems.ForEach(mi => mi.IsCollected = false);
+            if (meme != null)
+            {
+                meme.MemeItems.ForEach(mi => mi.IsCollected = false);
+
+                var memeObj = Instantiate(
+                    meme.MemePrefab,
+                    targetContainer.transform);
+                memeObj.transform.SetLocalPositionAndRotation(new Vector3(450,-300,0), Quaternion.identity);
+                memeObj.GetComponent<Meme>().MemeName = meme.MemeName;
+                memeObj.name = "MemeCompleted";
+            }
         }
     }
 }

@@ -15,14 +15,14 @@ namespace GameScene.Level.Memes
         
         public static Sprite[] GetSprites()
         {
-            if (!_loaded) 
+            if (!_sprites.Any()) 
                 LoadResources();
             return _sprites;
         }
 
         public static Sprite GetSprite(string name)
         {
-            if (!_loaded) 
+            if (!_sprites.Any()) 
                 LoadResources();
             
             return _sprites.FirstOrDefault(s => s.name == name);
@@ -30,7 +30,7 @@ namespace GameScene.Level.Memes
 
         public static Sprite GetRandomSprite()
         {
-            if (!_loaded) 
+            if (!_sprites.Any()) 
                 LoadResources();
             return _sprites[Random.Range(0, _sprites.Length)];
         }

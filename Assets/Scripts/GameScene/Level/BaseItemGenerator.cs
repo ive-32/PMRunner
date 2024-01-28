@@ -5,7 +5,7 @@ namespace GameScene.Level
 {
     public abstract class BaseItemGenerator : MonoBehaviour, IIntersectable
     {
-        protected float TimeToNextItem = 1;
+        protected float TimeToNextItem = 0.5f;
         
         protected virtual void Update()
         {

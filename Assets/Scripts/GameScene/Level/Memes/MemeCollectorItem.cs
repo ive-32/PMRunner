@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace GameScene.Level.Memes
 {
-    public class MemeCollectorItem
+    public class MemeCollectorItem : MonoBehaviour
     {
         public class MemeCollectorItemMemeItem
         {
@@ -16,26 +17,28 @@ namespace GameScene.Level.Memes
                 set
                 {
                     _isCollected = value;
-                    SpriteRenderer.color = _isCollected ? CollectedColor : UncollectedColor;
+                    Color currentColor = SpriteRenderer.color;
+                    currentColor.a = _isCollected ? CollectedAlpha : UncollectedAlpha;
+                    SpriteRenderer.color = currentColor;
                 }
             }
             public string Name;
             public SpriteRenderer SpriteRenderer;
         }
         
-        private static readonly Color UncollectedColor = new Color(0.5f, 0.5f, 0.5f);
-        private static readonly Color CollectedColor = new Color(0.5f, 1f, 0.8f);
+        private static readonly float UncollectedAlpha = 0.3f;
+        private static readonly float CollectedAlpha = 1f;
         
         public List<MemeCollectorItemMemeItem> MemeItems;
-        public GameObject Meme;
+        public GameObject MemePrefab;
+        public string MemeName;
         
         public bool IsCollected => MemeItems.All(m => m.IsCollected);
 
-        public readonly GameObject MemeCollectorItemObject;
 
-        public MemeCollectorItem(MemeDescription description)
+        public MemeDescription description;
+        void Start()
         {
-            MemeCollectorItemObject = new GameObject();
             MemeItems = description.itemNames
                 .Select(CreateMemeItemObject)
                 .ToList();
@@ -43,10 +46,17 @@ namespace GameScene.Level.Memes
             for (var i = 0; i < MemeItems.Count; i++)
             {
                 var memeItem = MemeItems[i].MemeItem.gameObject; 
-                memeItem.transform.SetParent(MemeCollectorItemObject.transform);
-                memeItem.transform.SetLocalPositionAndRotation(new Vector3(i, 0, 0), Quaternion.identity);
-                memeItem.GetComponent<SpriteRenderer>().color = UncollectedColor;
+                memeItem.transform.SetParent(transform);
+                memeItem.transform.SetLocalPositionAndRotation(new Vector3(i * 0.25f, 0, 0), Quaternion.identity);
+                memeItem.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+                Color currentColor = memeItem.GetComponent<SpriteRenderer>().color;
+                currentColor.a = UncollectedAlpha;
+                memeItem.GetComponent<SpriteRenderer>().color = currentColor;
             }
+
+            MemePrefab = Resources.Load<GameObject>("Memes/Meme");
+            MemeName = description.memeName;
+
         }
 
         private MemeCollectorItemMemeItem CreateMemeItemObject(string name)
