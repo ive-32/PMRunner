@@ -52,7 +52,7 @@ namespace GameScene.Level.Memes
                 var memeObj = Instantiate(
                     meme.MemePrefab,
                     targetContainer.transform);
-                memeObj.transform.SetLocalPositionAndRotation(new Vector3(450,-300,0), Quaternion.identity);
+                memeObj.transform.SetLocalPositionAndRotation(new Vector3(1200,-500,0), Quaternion.identity);
                 memeObj.GetComponent<Meme>().MemeName = meme.MemeName;
                 memeObj.name = "MemeCompleted";
                 return meme.MemeItems.Count;
