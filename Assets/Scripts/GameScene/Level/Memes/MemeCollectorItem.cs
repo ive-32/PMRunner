@@ -54,7 +54,8 @@ namespace GameScene.Level.Memes
                 memeItem.GetComponent<SpriteRenderer>().color = currentColor;
             }
 
-            MemePrefab = Resources.Load<GameObject>("Memes/Meme");
+            //MemePrefab = Resources.Load<GameObject>("Memes/Meme");
+            MemePrefab = Resources.Load<GameObject>("Memes/MemeImage");
             MemeName = description.memeName;
 
         }

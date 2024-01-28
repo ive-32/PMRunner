@@ -22,7 +22,7 @@ namespace GameScene.Level.Memes
                 memeCollectorItemObject.transform.name = $"MemeCollectorItem{i}";
                 memeCollectorItemObject.transform.SetParent(transform);
                 memeCollectorItemObject.transform.SetLocalPositionAndRotation(
-                    new Vector3(0.25f, -0.25f - i * 0.25f, 0), Quaternion.identity);
+                    new Vector3(-0.5f, 1.25f - i * 0.25f, 0), Quaternion.identity);
                 var memeCollectorItem = memeCollectorItemObject.AddComponent<MemeCollectorItem>();
                 memeCollectorItem.description = memeDescription;
 
@@ -48,12 +48,13 @@ namespace GameScene.Level.Memes
             if (meme != null)
             {
                 meme.MemeItems.ForEach(mi => mi.IsCollected = false);
-
+                var memePrefab = Resources.Load<GameObject>("Memes/MemeImage");
                 var memeObj = Instantiate(
-                    meme.MemePrefab,
-                    targetContainer.transform);
-                memeObj.transform.SetLocalPositionAndRotation(new Vector3(1200,-500,0), Quaternion.identity);
+                    memePrefab,
+                    targetContainer.transform.parent);
+                //memeObj.transform.SetLocalPositionAndRotation(new Vector3(1200,-500,0), Quaternion.identity);
                 memeObj.GetComponent<Meme>().MemeName = meme.MemeName;
+                memeObj.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
                 memeObj.name = "MemeCompleted";
                 return meme.MemeItems.Count;
             }

@@ -1,5 +1,6 @@
 
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace GameScene.Level.Memes
 {
@@ -9,8 +10,10 @@ namespace GameScene.Level.Memes
         private void Start()
         {
             var sprite = Resources.Load<Sprite>($"Memes/CompleteMemeTextures/{MemeName}");
-            var obj = transform.Find("ItemSprite");
-            obj.GetComponent<SpriteRenderer>().sprite = sprite;
+            //var obj = transform.Find("ItemSprite");
+            var image = transform.GetComponentInChildren<Image>();
+            image.sprite = sprite;
+            //obj.GetComponent<SpriteRenderer>().sprite = sprite;
             Destroy(gameObject, 3f);
             
         }

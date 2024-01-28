@@ -37,7 +37,16 @@ namespace GameScene.Level.UiElements
                 Invoke(nameof(GameOver), 2);
             }
         }
-        
+
+        public void AddHealth()
+        {
+            if (health < healthStars.Count)
+            {
+                healthStars[health].SetActive(true);
+                health++;
+            }
+
+        }
         private void GameOver()
         {
             Time.timeScale = 0; // Если хотим стопнуть игру

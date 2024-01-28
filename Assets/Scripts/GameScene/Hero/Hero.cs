@@ -4,6 +4,7 @@ using GameScene.Level.Memes;
 using GameScene.Level.UiElements;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace GameScene.Hero
 {
@@ -92,19 +93,24 @@ namespace GameScene.Hero
 
                 if (used > 2)
                 {
-                    var road = transform.parent.Find("Road").gameObject;
-                    var childCount = road.transform.childCount;
-                    for (var i = 0; i < childCount; i++)
+                    /*if (Random.Range(0, 100)<50)
                     {
-                        var street = road.transform.GetChild(i);
-                        var streetChildCount = street.childCount;
-                        for (var j = 0; j < streetChildCount; j++)
+                        var road = transform.parent.Find("Road").gameObject;
+                        var childCount = road.transform.childCount;
+                        for (var i = 0; i < childCount; i++)
                         {
-                            var obj = street.transform.GetChild(j);
-                            if (obj.tag == "Block")
-                                obj.transform.Find("Blocker").gameObject.SetActive(false);
+                            var street = road.transform.GetChild(i);
+                            var streetChildCount = street.childCount;
+                            for (var j = 0; j < streetChildCount; j++)
+                            {
+                                var obj = street.transform.GetChild(j);
+                                if (obj.tag == "Block")
+                                    obj.transform.Find("Blocker").gameObject.SetActive(false);
+                            }
                         }
-                    }
+                    }                    
+                    else */
+                        uiHealth.AddHealth();
                 }
             }
         }
@@ -121,7 +127,7 @@ namespace GameScene.Hero
             DoSideSteps();
         }
 
-        private void MoveToLeft()
+        public void MoveToLeft()
         {
             if (roadPosition > -1)
             {
@@ -129,11 +135,42 @@ namespace GameScene.Hero
             }
         }
         
-        private void MoveToRight()
+        public void MoveToRight()
         {
             if (roadPosition < 1)
             {
                 playerMoveRoad = roadPosition + 1;
+            }
+        }
+
+        public void UseMeme()
+        {
+            var used = _memeCollector.UseMeme();
+            if (used == 2)
+            {
+                playerRunPower = deafultPlayerRunPower;
+            }
+
+            if (used > 2)
+            {
+                /*if (Random.Range(0, 100)<50)
+                {
+                    var road = transform.parent.Find("Road").gameObject;
+                    var childCount = road.transform.childCount;
+                    for (var i = 0; i < childCount; i++)
+                    {
+                        var street = road.transform.GetChild(i);
+                        var streetChildCount = street.childCount;
+                        for (var j = 0; j < streetChildCount; j++)
+                        {
+                            var obj = street.transform.GetChild(j);
+                            if (obj.tag == "Block")
+                                obj.transform.Find("Blocker").gameObject.SetActive(false);
+                        }
+                    }
+                }                    
+                else */
+                uiHealth.AddHealth();
             }
         }
 
