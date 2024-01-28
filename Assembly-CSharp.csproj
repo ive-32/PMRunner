@@ -52,6 +52,7 @@
      <Compile Include="Assets/Scripts/GameScene/Level/Memes/MemeCollector.cs" />
      <Compile Include="Assets/Scripts/GameScene/Level/Blockers/Blocker.cs" />
      <Compile Include="Assets/Scripts/GameScene/Level/MainMenu.cs" />
+     <Compile Include="Assets/Scripts/GameScene/Level/UiElements/UiLabel.cs" />
      <Compile Include="Assets/Scripts/GameScene/Level/BaseTile.cs" />
      <Compile Include="Assets/Scripts/GameScene/MainCamera.cs" />
      <Compile Include="Assets/Scripts/GameScene/Level/Memes/MemeCollectorItem.cs" />
@@ -74,7 +75,6 @@
      <Compile Include="Assets/Scripts/GameScene/Level/GamePauseMenu.cs" />
      <Compile Include="Assets/Scripts/GameScene/Level/Level.cs" />
      <Compile Include="Assets/Scripts/GameScene/Level/Memes/MemeDescription.cs" />
-     <Compile Include="Assets/Scripts/GameScene/UiLabel.cs" />
      <Folder Include="Assets" />
      <Folder Include="Assets/Resources/UI/Image_green/s_button" />
      <Folder Include="Assets/Source Media/MemeItems" />

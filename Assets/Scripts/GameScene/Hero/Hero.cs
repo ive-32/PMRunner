@@ -77,10 +77,27 @@ namespace GameScene.Hero
             if (Input.GetKeyUp(KeyCode.Space))
             {
                 var used = _memeCollector.UseMeme();
-                if (used > 0 && _currentPlayerSpeed > playerRunPower)
+                if (used == 2 && _currentPlayerSpeed > playerRunPower)
                 {
-                    _currentPlayerSpeed -= playerRunPower;
+                    _currentPlayerSpeed = playerRunPower;
                     _timeToIncreaseSpeed = 2;
+                }
+
+                if (used > 2)
+                {
+                    var road = transform.parent.Find("Road").gameObject;
+                    var childCount = road.transform.childCount;
+                    for (var i = 0; i < childCount; i++)
+                    {
+                        var street = road.transform.GetChild(i);
+                        var streetChildCount = street.childCount;
+                        for (var j = 0; j < streetChildCount; j++)
+                        {
+                            var obj = street.transform.GetChild(j);
+                            if (obj.tag == "Block")
+                                obj.transform.Find("Blocker").gameObject.SetActive(false);
+                        }
+                    }
                 }
             }
 
