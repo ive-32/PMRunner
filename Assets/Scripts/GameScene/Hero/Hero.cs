@@ -2,135 +2,131 @@ using System.Linq;
 using GameScene.Level;
 using GameScene.Level.Blockers;
 using GameScene.Level.Memes;
+using GameScene.Enums;
 using UnityEngine;
 
 namespace GameScene.Hero
 {
     public class Hero : MonoBehaviour
     {
-        private int _targetPositionX = 1;
-        private const float PlayerSpeed = 1.5f;
-        private float _timeToRestore = 0;
+        /**
+         * Position on the road. 0 - middle
+         */
+        public int roadPosition = (int)Enums.PlayerRoad.Middle;
 
-        private IIntersectable _blockers;
-        private IIntersectable _memeItems;
+        /**
+         * Distance between roads
+         */
+        public float roadDistance = 4.25f;
 
-        private MemeCollector _memeCollector;
-        private GameObject _memeCollectorObject;
+        /**
+         * Speed of Main player by default
+         */
+        public float playerRunPower = 2.0f;
+
+        /**
+         * Speed of Main player by default
+         */
+        public float playerJumpPower = 8.0f;
+        
+        /**
+         * Died menu
+         */
+        public GameObject diedMenu;
+
+        /**
+         * Do we need move to other road
+         */
+        private int playerMoveRoad = 0;
+        
+        /**
+         * Set player animator
+         */
+        public GameObject playerObject = null;
+        
+        /**
+         * Set player animator
+         */
         private Animator _animator;
+        
+        /**
+         * Object for move
+         */
+        private Rigidbody _rigidbody;
 
         private void Start()
         {
-            var levelObj = transform.parent.gameObject;
-            _blockers = levelObj.GetComponentInChildren<BlockerGenerator>().GetComponent<BaseItemGenerator>();
-            _memeItems = levelObj.GetComponentInChildren<MemeItemsGenerator>().GetComponent<BaseItemGenerator>();
-            _memeCollectorObject = new GameObject();
-            _memeCollector = _memeCollectorObject.AddComponent<MemeCollector>();
-            _animator = gameObject.GetComponentInChildren<Animator>();
-
+            _animator = playerObject.GetComponentInChildren<Animator>();
+            _rigidbody = GetComponentInChildren<Rigidbody>();
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
-            if (_timeToRestore <= 0)
+            playerMoveRoad = 0;
+            
+            if (Input.GetKeyUp(KeyCode.Space))
             {
-                DoSideSteps();
-
-                CheckCrash();
-
-                CheckCollectMemeItem();
-
-                if (Input.GetKeyUp(KeyCode.Space))
-                {
-                    _memeCollector.UseMeme();
-                    Jump();
-                }
+                Jump();
             }
-            else
+
+            if (Input.GetAxisRaw("Horizontal") == -1)
             {
-                DoPauseAfterFalling();
+                MoveToLeft();
+            } else if (Input.GetAxisRaw("Horizontal") == 1)
+            {
+                MoveToRight();
             }
+            
+            DoSideSteps();
         }
 
-        private void TryMoveToLeft()
+        private void MoveToLeft()
         {
-            _targetPositionX = transform.position.x >= 1 
-                ? Mathf.RoundToInt(transform.position.x) - 1
-                : Mathf.RoundToInt(0);
+            if (roadPosition > -1)
+            {
+                --roadPosition;
+                playerMoveRoad = -1;
+            }
         }
         
-        private void TryMoveToRight()
+        private void MoveToRight()
         {
-            _targetPositionX = transform.position.x <= Game.LevelSize.x - 2 
-                ? Mathf.RoundToInt(transform.position.x) + 1
-                : Mathf.RoundToInt(Game.LevelSize.x - 1);
-        }
-
-        private void CheckCrash()
-        {
-            var blockers = _blockers.GetNearestObjects(transform.position, 0.3f);
-            
-            if (blockers.Any())
+            if (roadPosition < 1)
             {
-                blockers.ForEach(b => Destroy(b.gameObject));
-                //Game.PlayerMovingSpeed = Game.DefaultGameSpeed / 2;
-                var clips = _animator.GetCurrentAnimatorClipInfo(0);
-                var clip = clips.Where(c => c.clip.name == "Fall flat").ToList();
-                
-                _timeToRestore = clip.Any() ? clip[0].clip.length : 1f;
-                _animator.SetTrigger("Fall");
-            }
-        }
-
-        private void CheckCollectMemeItem()
-        {
-            var memeItems = _memeItems.GetNearestObjects(transform.position, 0.5f);
-
-            foreach (var memeItem in memeItems)
-            {
-                _memeCollector.CollectMemeItem(memeItem.GetComponent<MemeItem>().MemeName);
-                Destroy(memeItem.gameObject);
+                ++roadPosition;
+                playerMoveRoad = 1;
             }
         }
         
         private void DoPauseAfterFalling()
         {
-            _timeToRestore -= Time.deltaTime;
-            if (_timeToRestore <= 0)
-            {
-                _timeToRestore = 0;
-                Game.PlayerMovingSpeed = Game.DefaultGameSpeed;
-            }
+            _animator.SetTrigger("Fall");
+            playerRunPower = 0;
+            //Time.timeScale = 0; // Если хотим стопнуть игру
+            playerRunPower = 0;
+            diedMenu.SetActive(true);
         }
 
         private void Jump()
         {
+            _rigidbody.velocity = new Vector3(0, playerJumpPower, 0);
             _animator.SetTrigger("Jump");
         }
 
         private void DoSideSteps()
         {
-            var axis = Input.GetAxisRaw("Horizontal");
-            switch (axis)
+            _rigidbody.velocity = transform.TransformDirection(new Vector3(playerMoveRoad * roadDistance * 50, _rigidbody.velocity.y, playerRunPower));
+        }
+        
+        /**
+         * If collider of Player have collision with other colliders
+         */
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.tag.Equals("Block"))
             {
-                case < 0 : TryMoveToLeft(); break;
-                case > 0 : TryMoveToRight(); break;
-                    
+                DoPauseAfterFalling();
             }
-
-            var currentPosition = transform.position;
-
-            if (Mathf.Abs(_targetPositionX - currentPosition.x) > Mathf.Epsilon)
-            {
-                var targetPosition = new Vector3(_targetPositionX, currentPosition.y, currentPosition.z);
-                var direction = targetPosition - currentPosition;
-                var delta = direction.normalized * (Time.deltaTime * PlayerSpeed);
-                if (delta.magnitude < direction.magnitude)
-                    transform.position += delta;
-                else
-                    transform.SetPositionAndRotation(targetPosition, Quaternion.identity);
-            }
-
         }
     }
 }

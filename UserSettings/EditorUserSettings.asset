@@ -6,31 +6,34 @@ EditorUserSettings:
   serializedVersion: 4
   m_ConfigSettings:
     RecentlyUsedSceneGuid-0:
-      value: 5b520d0503545b0d0c0c0a2715770748154f4d2c7d7d7e627a7d4a35b4e1646a
+      value: 5a5757560101590a5d0c0e24427b5d44434e4c7a7b7a23677f2b4565b7b5353a
       flags: 0
     RecentlyUsedSceneGuid-1:
-      value: 0706520557025e0f0f0a0f7742775b4610161c292f2c20612c2b1c32bab4616a
+      value: 010206005c075b0f0c590a7a1175594413154d2b7a7b7735792c1e36b3e63561
       flags: 0
     RecentlyUsedSceneGuid-2:
-      value: 050402505d560c0c080b087340770b4246164a7b7a2b76612e7a1b6ab1e36c6c
+      value: 5506550204565d080f0d0a7048750b4442151d7c7d7a766779281f63b6e6636d
       flags: 0
     RecentlyUsedSceneGuid-3:
-      value: 550907545504080c08575c7712770d114e164a29287c23602c2d1e36b2b8366b
+      value: 5406565050035b5d5d5b082445725d4415151a2f7e7120312e2b4e66e6b56239
       flags: 0
     RecentlyUsedSceneGuid-4:
-      value: 570202005000590d0c5a5e204477064414154a797c7973627d7a1c35e1e1616c
+      value: 000207555c025d080e565d7a47770e414515197a7f7d22697b7e4a31e3b2656b
       flags: 0
     RecentlyUsedSceneGuid-5:
-      value: 5205055300065f0f555a542116770a4247154b7a7a2e76657e784432b3b2633a
+      value: 5454020256535d5e580a547b46720a4417154c7e7f707e64787c4e61e3e3673d
       flags: 0
     RecentlyUsedSceneGuid-6:
-      value: 50525755540d50090e0d5f2348775a484315407d282c2360742a4e61e4e46c6b
+      value: 5a08575f5207595a0f5d59741173094444164f7d7d2a23317c7a4465bbe1646d
       flags: 0
     RecentlyUsedSceneGuid-7:
-      value: 5b08040757030d0e5a0a082143775d491515192c7b7e23327a2f1965b2b8313c
+      value: 5a0506035c535b0b555e5e7247705b444e161c2f2a7871342f2d4e65b6b5373a
       flags: 0
     RecentlyUsedSceneGuid-8:
-      value: 000207555c025d080e565d7a47770e414515197a7f7d22697b7e4a31e3b2656b
+      value: 0706520557025e0f0f0a0f7742775b4610161c292f2c20612c2b1c32bab4616a
+      flags: 0
+    UIBuilder.EditorExtensionModeKey:
+      value: 37434103
       flags: 0
     vcSharedLogLevel:
       value: 0d5e400f0650
@@ -40,7 +43,7 @@ EditorUserSettings:
   m_VCDebugCmd: 0
   m_VCDebugOut: 0
   m_SemanticMergeMode: 2
-  m_DesiredImportWorkerCount: 3
+  m_DesiredImportWorkerCount: 4
   m_StandbyImportWorkerCount: 2
   m_IdleImportWorkerShutdownDelay: 60000
   m_VCShowFailedCheckout: 1

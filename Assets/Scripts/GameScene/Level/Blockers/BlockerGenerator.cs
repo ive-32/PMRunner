@@ -2,19 +2,20 @@ using UnityEngine;
 
 namespace GameScene.Level.Blockers
 {
-    public class BlockerGenerator : BaseItemGenerator
+    public class BlockerGenerator : MonoBehaviour
     {
-        private GameObject _blockerItem;
-
         private void Start()
         {
-            _blockerItem = Resources.Load<GameObject>("Blockers/Blocker");
-        }
+            int childrenId = Mathf.FloorToInt(Random.Range(0, transform.childCount));
+            GameObject gameObject = transform.GetChild(childrenId).gameObject;
+            
+            gameObject.SetActive(true);
 
-        protected override void GenerateItem()
-        {
-            var objCoord = Random.Range(0, 3);
-            Instantiate(_blockerItem, new Vector3(objCoord, Game.LevelSize.y, 0), Quaternion.identity, transform);
+            if (gameObject.tag == "Block")
+            {
+                int blockId = Mathf.FloorToInt(Random.Range(0, gameObject.transform.childCount));
+                gameObject.transform.GetChild(blockId).gameObject.SetActive(true);
+            }
         }
     }
 }
