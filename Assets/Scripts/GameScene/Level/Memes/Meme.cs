@@ -11,7 +11,7 @@ namespace GameScene.Level.Memes
             var sprite = Resources.Load<Sprite>($"Memes/CompleteMemeTextures/{MemeName}");
             var obj = transform.Find("ItemSprite");
             obj.GetComponent<SpriteRenderer>().sprite = sprite;
-            Destroy(gameObject, 1f);
+            Destroy(gameObject, 3f);
             
         }
     }
