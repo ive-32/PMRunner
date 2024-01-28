@@ -18,6 +18,8 @@ namespace GameScene.Hero
          */
         public float roadDistance = 4.25f;
         private const float PlayerSlideSpeed = 4;
+        private float _timeToIncreaseSpeed = 1;
+        private float _currentPlayerSpeed = 2.0f;
 
         /**
          * Speed of Main player by default
@@ -67,13 +69,27 @@ namespace GameScene.Hero
             _memeCollector = _memeCollectorObject.AddComponent<MemeCollector>();
             _memeCollector.targetContainer = transform.Find("Canvas/GameUI/MemeBox").gameObject;
 
+            _currentPlayerSpeed = playerRunPower;
         }
 
         private void Update()
         {
             if (Input.GetKeyUp(KeyCode.Space))
             {
-                _memeCollector.UseMeme();
+                var used = _memeCollector.UseMeme();
+                if (used > 0 && _currentPlayerSpeed > playerRunPower)
+                {
+                    _currentPlayerSpeed -= playerRunPower;
+                    _timeToIncreaseSpeed = 2;
+                }
+            }
+
+            _timeToIncreaseSpeed -= Time.deltaTime;
+            if (_timeToIncreaseSpeed <= 0)
+            {
+                if (_currentPlayerSpeed < 20)
+                    _currentPlayerSpeed += 0.3f;
+                _timeToIncreaseSpeed = 1;
             }
         }
         private void FixedUpdate()
@@ -87,17 +103,6 @@ namespace GameScene.Hero
             }
             
             DoSideSteps();
-        }
-
-        private void CheckCollectMemeItem()
-        {
-            var memeItems = _memeItems.GetNearestObjects(transform.position, 0.5f);
-
-            foreach (var memeItem in memeItems)
-            {
-                _memeCollector.CollectMemeItem(memeItem.GetComponent<MemeItem>().MemeName);
-                Destroy(memeItem.gameObject);
-            }
         }
 
         private void MoveToLeft()
@@ -134,13 +139,13 @@ namespace GameScene.Hero
         {
             var currentPosition = _rigidbody.position;
             var targetRigidBodyPosition = new Vector3(_rigidbody.position.x, _rigidbody.position.y,
-                _rigidbody.position.z + Time.fixedDeltaTime * playerRunPower);
+                _rigidbody.position.z + Time.fixedDeltaTime * _currentPlayerSpeed);
 
             if (Mathf.Abs(playerMoveRoad * roadDistance - currentPosition.x) > 0.1f)
             {
                 var targetPosition = new Vector3(playerMoveRoad * roadDistance, currentPosition.y, currentPosition.z);
                 var direction = targetPosition - currentPosition;
-                var delta = direction.normalized * (Time.deltaTime * PlayerSlideSpeed);
+                var delta = direction.normalized * (Time.deltaTime * _currentPlayerSpeed * 2);
                 if (delta.magnitude > direction.magnitude)
                     delta = direction;
                 targetRigidBodyPosition += delta;
