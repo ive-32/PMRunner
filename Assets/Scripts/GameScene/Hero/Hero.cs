@@ -23,10 +23,6 @@ namespace GameScene.Hero
          * Distance between roads
          */
         public float roadDistance = 4.25f;
-        
-        private const float PlayerSlideSpeed = 4;
-        private float _timeToIncreaseSpeed = 1;
-        private float _currentPlayerSpeed = 2.0f;
 
         /**
          * Speed of Main player by default
@@ -82,8 +78,6 @@ namespace GameScene.Hero
             _memeCollectorObject = new GameObject();
             _memeCollector = _memeCollectorObject.AddComponent<MemeCollector>();
             _memeCollector.targetContainer = transform.Find("Canvas/GameUI/MemeBox").gameObject;
-
-            _currentPlayerSpeed = playerRunPower;
         }
 
         private void Update()
@@ -91,10 +85,9 @@ namespace GameScene.Hero
             if (Input.GetKeyUp(KeyCode.Space))
             {
                 var used = _memeCollector.UseMeme();
-                if (used == 2 && _currentPlayerSpeed > playerRunPower)
+                if (used == 2)
                 {
-                    _currentPlayerSpeed = playerRunPower;
-                    _timeToIncreaseSpeed = 2;
+                    playerRunPower = deafultPlayerRunPower;
                 }
 
                 if (used > 2)
@@ -113,14 +106,6 @@ namespace GameScene.Hero
                         }
                     }
                 }
-            }
-
-            _timeToIncreaseSpeed -= Time.deltaTime;
-            if (_timeToIncreaseSpeed <= 0)
-            {
-                if (_currentPlayerSpeed < 20)
-                    _currentPlayerSpeed += 0.3f;
-                _timeToIncreaseSpeed = 1;
             }
         }
         private void FixedUpdate()
@@ -162,7 +147,7 @@ namespace GameScene.Hero
         {
             var currentPosition = _rigidbody.position;
             var targetRigidBodyPosition = new Vector3(_rigidbody.position.x, _rigidbody.position.y,
-                _rigidbody.position.z + Time.fixedDeltaTime * _currentPlayerSpeed);
+                _rigidbody.position.z + Time.fixedDeltaTime * playerRunPower);
 
             if (Mathf.Abs(playerMoveRoad * roadDistance - currentPosition.x) > 0.1f)
             {
@@ -209,7 +194,6 @@ namespace GameScene.Hero
                 _memeCollector.CollectMemeItem(other.gameObject.GetComponent<MemeItem>().MemeName);
                 Destroy(other.gameObject);
             }
-
         }
     }
 }
