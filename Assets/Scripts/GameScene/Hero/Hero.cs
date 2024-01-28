@@ -1,6 +1,7 @@
 using System;
 using GameScene.Level;
 using GameScene.Level.Memes;
+using GameScene.Level.UiElements;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,11 @@ namespace GameScene.Hero
 {
     public class Hero : MonoBehaviour
     {
+        /**
+         * Health of person
+         */
+        public int health = 3;
+        
         /**
          * Position on the road. 0 - middle
          */
@@ -17,9 +23,6 @@ namespace GameScene.Hero
          * Distance between roads
          */
         public float roadDistance = 4.25f;
-        private const float PlayerSlideSpeed = 4;
-        private float _timeToIncreaseSpeed = 1;
-        private float _currentPlayerSpeed = 2.0f;
 
         /**
          * Speed of Main player by default
@@ -29,17 +32,18 @@ namespace GameScene.Hero
         /**
          * Speed of Main player by default
          */
-        public float playerJumpPower = 8.0f;
-        
+        private float deafultPlayerRunPower = 2.0f;
+
         /**
-         * Died menu
+         * Speed of Main player by default
          */
-        public GameObject diedMenu;
+        public float playerJumpPower = 8.0f;
 
         /**
          * Do we need move to other road
          */
         private int playerMoveRoad = 0;
+        
         private MemeCollector _memeCollector;
         private GameObject _memeCollectorObject;
         private IIntersectable _memeItems;
@@ -58,9 +62,15 @@ namespace GameScene.Hero
          * Object for move
          */
         private Rigidbody _rigidbody;
+        
+        /**
+         * Object for move
+         */
+        public UiHealth uiHealth;
 
         private void Start()
         {
+            deafultPlayerRunPower = playerRunPower;
             _animator = playerObject.GetComponentInChildren<Animator>();
             _rigidbody = GetComponentInChildren<Rigidbody>();
             var levelObj = transform.parent.gameObject;
@@ -68,8 +78,6 @@ namespace GameScene.Hero
             _memeCollectorObject = new GameObject();
             _memeCollector = _memeCollectorObject.AddComponent<MemeCollector>();
             _memeCollector.targetContainer = transform.Find("Canvas/GameUI/MemeBox").gameObject;
-
-            _currentPlayerSpeed = playerRunPower;
         }
 
         private void Update()
@@ -77,10 +85,9 @@ namespace GameScene.Hero
             if (Input.GetKeyUp(KeyCode.Space))
             {
                 var used = _memeCollector.UseMeme();
-                if (used == 2 && _currentPlayerSpeed > playerRunPower)
+                if (used == 2)
                 {
-                    _currentPlayerSpeed = playerRunPower;
-                    _timeToIncreaseSpeed = 2;
+                    playerRunPower = deafultPlayerRunPower;
                 }
 
                 if (used > 2)
@@ -100,14 +107,6 @@ namespace GameScene.Hero
                     }
                 }
             }
-
-            _timeToIncreaseSpeed -= Time.deltaTime;
-            if (_timeToIncreaseSpeed <= 0)
-            {
-                if (_currentPlayerSpeed < 20)
-                    _currentPlayerSpeed += 0.3f;
-                _timeToIncreaseSpeed = 1;
-            }
         }
         private void FixedUpdate()
         {
@@ -126,7 +125,7 @@ namespace GameScene.Hero
         {
             if (roadPosition > -1)
             {
-                playerMoveRoad = roadPosition-1;
+                playerMoveRoad = roadPosition - 1;
             }
         }
         
@@ -136,14 +135,6 @@ namespace GameScene.Hero
             {
                 playerMoveRoad = roadPosition + 1;
             }
-        }
-        
-        private void DoPauseAfterFalling()
-        {
-            //_animator.SetTrigger("Fall");
-            playerRunPower = 0;
-            //Time.timeScale = 0; // Если хотим стопнуть игру
-            diedMenu.SetActive(true);
         }
 
         private void Jump()
@@ -156,13 +147,13 @@ namespace GameScene.Hero
         {
             var currentPosition = _rigidbody.position;
             var targetRigidBodyPosition = new Vector3(_rigidbody.position.x, _rigidbody.position.y,
-                _rigidbody.position.z + Time.fixedDeltaTime * _currentPlayerSpeed);
+                _rigidbody.position.z + Time.fixedDeltaTime * playerRunPower);
 
             if (Mathf.Abs(playerMoveRoad * roadDistance - currentPosition.x) > 0.1f)
             {
                 var targetPosition = new Vector3(playerMoveRoad * roadDistance, currentPosition.y, currentPosition.z);
                 var direction = targetPosition - currentPosition;
-                var delta = direction.normalized * (Time.deltaTime * _currentPlayerSpeed * 2);
+                var delta = direction.normalized * (Time.deltaTime * playerRunPower);
                 if (delta.magnitude > direction.magnitude)
                     delta = direction;
                 targetRigidBodyPosition += delta;
@@ -170,6 +161,7 @@ namespace GameScene.Hero
 
             _rigidbody.position = targetRigidBodyPosition;
             roadPosition = Mathf.RoundToInt(_rigidbody.position.x / roadDistance);
+            playerRunPower += 0.01f;
         }
         
         /**
@@ -180,8 +172,19 @@ namespace GameScene.Hero
             if (collision.gameObject.tag.Equals("Block"))
             {
                 collision.gameObject.SetActive(false);
-                //DoPauseAfterFalling();
+                _animator.SetTrigger("Fall");
+                playerRunPower = 0;
+                Invoke(nameof(ContinueRun), 3);
+                uiHealth.LooseHealth();
             }
+        }
+        
+        /**
+         * If collider of Player have collision with other colliders
+         */
+        private void ContinueRun()
+        {
+            playerRunPower = deafultPlayerRunPower;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -191,7 +194,6 @@ namespace GameScene.Hero
                 _memeCollector.CollectMemeItem(other.gameObject.GetComponent<MemeItem>().MemeName);
                 Destroy(other.gameObject);
             }
-
         }
     }
 }
