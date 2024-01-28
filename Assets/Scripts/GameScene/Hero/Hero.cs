@@ -23,6 +23,10 @@ namespace GameScene.Hero
          * Distance between roads
          */
         public float roadDistance = 4.25f;
+        
+        private const float PlayerSlideSpeed = 4;
+        private float _timeToIncreaseSpeed = 1;
+        private float _currentPlayerSpeed = 2.0f;
 
         /**
          * Speed of Main player by default
@@ -79,16 +83,48 @@ namespace GameScene.Hero
             _memeCollector = _memeCollectorObject.AddComponent<MemeCollector>();
             _memeCollector.targetContainer = transform.Find("Canvas/GameUI/MemeBox").gameObject;
 
+            _currentPlayerSpeed = playerRunPower;
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
-            
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyUp(KeyCode.Space))
             {
-                _memeCollector.UseMeme();
+                var used = _memeCollector.UseMeme();
+                if (used == 2 && _currentPlayerSpeed > playerRunPower)
+                {
+                    _currentPlayerSpeed = playerRunPower;
+                    _timeToIncreaseSpeed = 2;
+                }
+
+                if (used > 2)
+                {
+                    var road = transform.parent.Find("Road").gameObject;
+                    var childCount = road.transform.childCount;
+                    for (var i = 0; i < childCount; i++)
+                    {
+                        var street = road.transform.GetChild(i);
+                        var streetChildCount = street.childCount;
+                        for (var j = 0; j < streetChildCount; j++)
+                        {
+                            var obj = street.transform.GetChild(j);
+                            if (obj.tag == "Block")
+                                obj.transform.Find("Blocker").gameObject.SetActive(false);
+                        }
+                    }
+                }
             }
 
+            _timeToIncreaseSpeed -= Time.deltaTime;
+            if (_timeToIncreaseSpeed <= 0)
+            {
+                if (_currentPlayerSpeed < 20)
+                    _currentPlayerSpeed += 0.3f;
+                _timeToIncreaseSpeed = 1;
+            }
+        }
+        private void FixedUpdate()
+        {
             if (Input.GetAxisRaw("Horizontal") == -1)
             {
                 MoveToLeft();
@@ -98,17 +134,6 @@ namespace GameScene.Hero
             }
             
             DoSideSteps();
-        }
-
-        private void CheckCollectMemeItem()
-        {
-            var memeItems = _memeItems.GetNearestObjects(transform.position, 0.5f);
-
-            foreach (var memeItem in memeItems)
-            {
-                _memeCollector.CollectMemeItem(memeItem.GetComponent<MemeItem>().MemeName);
-                Destroy(memeItem.gameObject);
-            }
         }
 
         private void MoveToLeft()
@@ -137,7 +162,7 @@ namespace GameScene.Hero
         {
             var currentPosition = _rigidbody.position;
             var targetRigidBodyPosition = new Vector3(_rigidbody.position.x, _rigidbody.position.y,
-                _rigidbody.position.z + Time.fixedDeltaTime * playerRunPower);
+                _rigidbody.position.z + Time.fixedDeltaTime * _currentPlayerSpeed);
 
             if (Mathf.Abs(playerMoveRoad * roadDistance - currentPosition.x) > 0.1f)
             {

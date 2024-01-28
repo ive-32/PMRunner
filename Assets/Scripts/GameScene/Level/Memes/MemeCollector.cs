@@ -41,7 +41,7 @@ namespace GameScene.Level.Memes
                 memeItem.IsCollected = true;
         }
 
-        public void UseMeme()
+        public int UseMeme()
         {
             var meme = MemeCollectorItems.FirstOrDefault(m => m.IsCollected);
 
@@ -55,7 +55,10 @@ namespace GameScene.Level.Memes
                 memeObj.transform.SetLocalPositionAndRotation(new Vector3(450,-300,0), Quaternion.identity);
                 memeObj.GetComponent<Meme>().MemeName = meme.MemeName;
                 memeObj.name = "MemeCompleted";
+                return meme.MemeItems.Count;
             }
+
+            return 0;
         }
     }
 }
