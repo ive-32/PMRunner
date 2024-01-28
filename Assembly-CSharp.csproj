@@ -168,7 +168,6 @@
      <Folder Include="Assets/TextMesh Pro/Resources/Style Sheets" />
      <Folder Include="Assets/TextMesh Pro/Fonts" />
      <Folder Include="Assets/Resources/Characters" />
-     <Folder Include="Assets/Resources/Fonts" />
      <Folder Include="Assets/Resources/SimplePoly City/Models" />
      <None Include="Assets/TextMesh Pro/Resources/LineBreaking Following Characters.txt" />
      <Folder Include="Assets/Resources/UI/Image_green/button" />
@@ -918,6 +917,11 @@
       <Project>{1ec7ac8a-6514-4787-88c2-c45494fda91b}</Project>
       <Name>Boxophobic.Utils.Scripts</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Resources\Fonts\Coiny-Regular.otf" />
+    <Content Include="Assets\Resources\Fonts\Hey Comic.otf" />
+    <Content Include="Assets\Resources\Fonts\Hey Comic.ttf" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
