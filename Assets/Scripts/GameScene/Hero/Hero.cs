@@ -69,14 +69,15 @@ namespace GameScene.Hero
 
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
-            
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyUp(KeyCode.Space))
             {
                 _memeCollector.UseMeme();
             }
-
+        }
+        private void FixedUpdate()
+        {
             if (Input.GetAxisRaw("Horizontal") == -1)
             {
                 MoveToLeft();

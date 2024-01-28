@@ -28,6 +28,7 @@ namespace GameScene.Level.Memes
             };
 
             var pos = Random.insideUnitCircle * 5;
+            pos.x = Random.Range(-1, 2) * 4.25f;
             Instantiate(_memeItem, streetPart.position + new Vector3(pos.x, 0, pos.y), Quaternion.identity, transform);
         }
     }
